@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="高德地图,DIY地图,高德地图生成器">
+    <meta name="description" content="高德地图，DIY地图，自己制作地图，生成自己的高德地图">
+    <title>高德地图 - DIY我的地图</title>
+    <style>
+        body { margin: 0; font: 13px/1.5 "Microsoft YaHei", "Helvetica Neue", "Sans-Serif"; min-height: 960px; min-width: 600px; }
+        .my-map { margin: 0 auto; width: 500px; height: 700px; }
+        .my-map .icon { background: url(http://lbs.amap.com/console/public/show/marker.png) no-repeat; }
+        .my-map .icon-cir { height: 31px; width: 28px; }
+        .my-map .icon-cir-red { background-position: -11px -5px; }
+        .amap-container{height: 100%;}
+    </style>
+</head>
+<body>
+    <div id="wrap" class="my-map">
+        <div id="mapContainer"></div>
+    </div>
+    <script src="http://webapi.amap.com/maps?v=1.3&key=8325164e247e15eea68b59e89200988b"></script>
+    <script>
+    !function(){
+        var infoWindow, map, level = 15,
+            center = {lng: 114.362102, lat: 30.536335},
+            features = [{type: "Marker", name: "星湖边的樱花", desc: "<img src="http://whudoc.qiniudn.com/2016/3-A.JPG?imageView2/2/w/280"><br>不为人知的最美樱花。<br>", color: "red", icon: "cir", offset: {x: -9, y: -31}, lnglat: {lng: 114.359423, lat: 30.527159}},
+                {type: "Marker", name: "星湖的樱花2", desc: "<img src="http://whudoc.qiniudn.com/2016/3-B.jpg?imageView2/2/w/280">", color: "red", icon: "cir", offset: {x: -9, y: -31}, lnglat: {lng: 114.359653, lat: 30.527375}},
+                {type: "Marker", name: "落英缤纷", desc: "<img src="http://whudoc.qiniudn.com/2016/3-C.jpg?imageView2/2/w/280">", color: "red", icon: "cir", offset: {x: -9, y: -31}, lnglat: {lng: 114.359098, lat: 30.52762}},
+                {type: "Marker", name: "信息学部图书馆边的樱花", desc: "<img src="http://whudoc.qiniudn.com/2016/3-D.png?imageView2/2/w/280">", color: "red", icon: "cir", offset: {x: -9, y: -31}, lnglat: {lng: 114.360709, lat: 30.529141}},
+                {type: "Marker", name: "鉴心湖", desc: "<img src="http://whudoc.qiniudn.com/2016/喷泉.jpg?imageView2/2/w/280">", color: "red", icon: "cir", offset: {x: -9, y: -31}, lnglat: {lng: 114.363582, lat: 30.537287}},
+                {type: "Marker", name: "鲲鹏广场", desc: "<img src="http://whudoc.qiniudn.com/2016/鲲鹏.JPG?imageView2/2/w/280">", color: "red", icon: "cir", offset: {x: -9, y: -31}, lnglat: {lng: 114.362305, lat: 30.538747}},
+                {type: "Marker", name: "樱顶", desc: "<img src="http://whudoc.qiniudn.com/2016/樱顶2.jpg?imageView2/2/w/280"><br><br><img src="http://whudoc.qiniudn.com/2016/樱顶4.jpg?imageView2/2/w/280"><br><br><img src="http://whudoc.qiniudn.com/2016/樱顶3.jpg?imageView2/2/w/280">", color: "red", icon: "cir", offset: {x: -9, y: -31}, lnglat: {lng: 114.362922, lat: 30.539348}},
+                {type: "Marker", name: "老图书馆", desc: "<img src="http://whudoc.qiniudn.com/2016/老图书馆.jpg?imageView2/2/w/280">", color: "red", icon: "cir", offset: {x: -9, y: -31}, lnglat: {lng: 114.364024, lat: 30.53999}},
+                {type: "Marker", name: "樱花大道", desc: "<img src="http://whudoc.qiniudn.com/2016/樱花大道.jpg?imageView2/2/w/280">", color: "red", icon: "cir", offset: {x: -9, y: -31}, lnglat: {lng: 114.365008, lat: 30.539523}},
+                {type: "Polyline", name: "樱花游路线", desc: "", strokeWeight: 5, strokeColor: "#19A4EB", strokeOpacity: 0.8, lnglat: [{lng: 114.364359, lat: 30.522755}, {lng: 114.362235, lat: 30.523947}, {lng: 114.361259, lat: 30.524465}, {lng: 114.361323, lat: 30.525028}, {lng: 114.361339, lat: 30.525939}, {lng: 114.361296, lat: 30.526331}, {lng: 114.36128, lat: 30.526737}, {lng: 114.359703, lat: 30.526737}, {lng: 114.359548, lat: 30.52683}, {lng: 114.359446, lat: 30.52701}, {lng: 114.359387, lat: 30.527153}, {lng: 114.359484, lat: 30.527201}, {lng: 114.359571, lat: 30.527265}, {lng: 114.359688, lat: 30.527561}, {lng: 114.35972, lat: 30.527667}, {lng: 114.358926, lat: 30.527681}, {lng: 114.357923, lat: 30.527686}, {lng: 114.357923, lat: 30.527959}, {lng: 114.358674, lat: 30.527931}, {lng: 114.358647, lat: 30.528499}, {lng: 114.358915, lat: 30.52849}, {lng: 114.359001, lat: 30.528629}, {lng: 114.359763, lat: 30.528629}, {lng: 114.359757, lat: 30.52886}, {lng: 114.360669, lat: 30.528869}, {lng: 114.360637, lat: 30.529211}, {lng: 114.360684, lat: 30.529817}, {lng: 114.359354, lat: 30.529799}, {lng: 114.358394, lat: 30.529518}, {lng: 114.358174, lat: 30.529796}, {lng: 114.357986, lat: 30.530188}, {lng: 114.357557, lat: 30.531149}, {lng: 114.3576, lat: 30.531477}, {lng: 114.357772, lat: 30.531898}, {lng: 114.357734, lat: 30.532166}, {lng: 114.357632, lat: 30.532379}, {lng: 114.357391, lat: 30.532702}, {lng: 114.358077, lat: 30.533173}, {lng: 114.358861, lat: 30.5337}, {lng: 114.359633, lat: 30.534217}, {lng: 114.360137, lat: 30.534883}, {lng: 114.36018, lat: 30.535058}, {lng: 114.360502, lat: 30.53504}, {lng: 114.360609, lat: 30.534717}, {lng: 114.360899, lat: 30.534781}, {lng: 114.361157, lat: 30.534855}, {lng: 114.3612, lat: 30.535095}, {lng: 114.361521, lat: 30.535132}, {lng: 114.361564, lat: 30.535252}, {lng: 114.361843, lat: 30.535308}, {lng: 114.361875, lat: 30.535502}, {lng: 114.361382, lat: 30.535687}, {lng: 114.361629, lat: 30.536001}, {lng: 114.362186, lat: 30.53586}, {lng: 114.362347, lat: 30.536516}, {lng: 114.362567, lat: 30.537398}, {lng: 114.362481, lat: 30.537657}, {lng: 114.363414, lat: 30.537112}, {lng: 114.363715, lat: 30.537361}, {lng: 114.363819, lat: 30.537611}, {lng: 114.363444, lat: 30.538091}, {lng: 114.362532, lat: 30.537851}, {lng: 114.362478, lat: 30.53884}, {lng: 114.362901, lat: 30.539182}, {lng: 114.362858, lat: 30.539634}, {lng: 114.364071, lat: 30.539782}, {lng: 114.364189, lat: 30.539385}, {lng: 114.365079, lat: 30.53956}, {lng: 114.36721, lat: 30.539773}, {lng: 114.367553, lat: 30.538017}, {lng: 114.367317, lat: 30.537759}, {lng: 114.367467, lat: 30.536557}, {lng: 114.366459, lat: 30.535781}, {lng: 114.366201, lat: 30.535485}, {lng: 114.367381, lat: 30.532454}, {lng: 114.366544, lat: 30.532547}, {lng: 114.365944, lat: 30.532343}, {lng: 114.366244, lat: 30.531992}, {lng: 114.365278, lat: 30.53007}, {lng: 114.36457, lat: 30.528425}, {lng: 114.363626, lat: 30.526115}, {lng: 114.36251, lat: 30.524322}, {lng: 114.363476, lat: 30.52447}]}];
+
+        function loadFeatures(){
+            for(var feature, data, i = 0, len = features.length, j, jl, path; i < len; i++){
+                data = features[i];
+                switch(data.type){
+                    case "Marker":
+                        feature = new AMap.Marker({ map: map, position: new AMap.LngLat(data.lnglat.lng, data.lnglat.lat),
+                            zIndex: 3, extData: data, offset: new AMap.Pixel(data.offset.x, data.offset.y), title: data.name,
+                            content: '<div class="icon icon-' + data.icon + ' icon-'+ data.icon +'-' + data.color +'"></div>' });
+                        break;
+                    case "Polyline":
+                        for(j = 0, jl = data.lnglat.length, path = []; j < jl; j++){
+                            path.push(new AMap.LngLat(data.lnglat[j].lng, data.lnglat[j].lat));
+                        }
+                        feature = new AMap.Polyline({ map: map, path: path, extData: data, zIndex: 2,
+                            strokeWeight: data.strokeWeight, strokeColor: data.strokeColor, strokeOpacity: data.strokeOpacity });
+                        break;
+                    case "Polygon":
+                        for(j = 0, jl = data.lnglat.length, path = []; j < jl; j++){
+                            path.push(new AMap.LngLat(data.lnglat[j].lng, data.lnglat[j].lat));
+                        }
+                        feature = new AMap.Polygon({ map: map, path: path, extData: data, zIndex: 1,
+                            strokeWeight: data.strokeWeight, strokeColor: data.strokeColor, strokeOpacity: data.strokeOpacity,
+                            fillColor: data.fillColor, fillOpacity: data.fillOpacity });
+                        break;
+                    default: feature = null;
+                }
+                if(feature){ AMap.event.addListener(feature, "click", mapFeatureClick); }
+            }
+        }
+
+        function mapFeatureClick(e){
+            if(!infoWindow){ infoWindow = new AMap.InfoWindow({autoMove: true}); }
+            var extData = e.target.getExtData();
+            infoWindow.setContent("<h5>" + extData.name + "</h5><div>" + extData.desc + "</div>");
+            infoWindow.open(map, e.lnglat);
+        }
+
+        map = new AMap.Map("mapContainer", {center: new AMap.LngLat(center.lng, center.lat), level: level});
+        new AMap.Buildings({map: map, zIndex: 2});
+        loadFeatures();
+
+        map.on('complete', function(){
+            map.plugin(["AMap.ToolBar", "AMap.OverView", "AMap.Scale"], function(){
+                map.addControl(new AMap.ToolBar);
+            map.addControl(new AMap.OverView({isOpen: true}));
+            map.addControl(new AMap.Scale);
+            });
+        })
+
+    }();
+    </script>
+</body>
+</html>
